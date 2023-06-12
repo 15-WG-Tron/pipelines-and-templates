@@ -1,18 +1,18 @@
-# Project Pipelines
+# Tron CI Pipelines
 
-This repository contains my project's source code and is integrated with GitHub Actions for continuous integration and deployment.
+This repository contains CI pipeline files for the Tron organization. These pipelines are designed to automate the continuous integration process and ensure code quality across Tron projects.
 
 ## Pipelines
 
 ### CI Pipeline
 
-The CI (Continuous Integration) pipeline runs on every commit to ensure code quality, run tests, and perform security checks. It consists of the following stages:
+The CI pipeline is triggered on every commit to a branch. It performs the following stages:
 
 - Load scripts, if needed
 - Environment variable validation, if needed
 - Build
 - Unit tests
-- Dependency Installation
+- Dependency installation
 - Code linting
 - Dependency check
 - Fortify ScanCentral Scan
@@ -21,19 +21,27 @@ The CI (Continuous Integration) pipeline runs on every commit to ensure code qua
 
 ### Deployment Pipeline
 
-The deployment pipeline runs on merging changes to the main branch. It handles deploying the application to staging and provides manual control for deploying to production. The stages in this pipeline include:
+The deployment pipeline is triggered when changes are merged to the master branch. It includes the following stages:
 
 - End-to-end tests
+- Penetration testing
 - Deploy to staging
 - Manual control for deploying to production
 
 ## Workflow Files
 
-- `.github/workflows/ci-pipeline.yaml`: Defines the CI pipeline workflow.
-- `.github/workflows/deployment-pipeline.yaml`: Defines the deployment pipeline workflow.
+The CI pipeline workflow files are organized in the `.github/workflows` directory of this repository. You can find the following files:
+
+- `.github/workflows/commit-branch.yaml`: Defines the Commit Branch pipeline workflow.
+- `.github/workflows/merge-to-master.yaml`: Defines the Merge to Master pipeline workflow.
 
 ## Usage
 
-To run the pipelines manually or view their status, navigate to the "Actions" tab above and select the desired workflow.
+To use these CI pipelines in your Tron projects, you can include the appropriate workflow file in your project repository's `.github/workflows` directory. Adjust the file as needed based on your project's specific requirements.
 
+Make sure to configure any necessary environment variables and adjust the steps to match your project's build, testing, and deployment processes.
+
+## Contributing
+
+We welcome contributions to enhance and improve the CI pipelines in this repository. If you have suggestions, bug fixes, or new features, please feel free to submit a pull request.
 
