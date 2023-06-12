@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-          - name: Get remote Repository name
+          - name: Get Remote Repository name
             run: echo Remote Repository - ${{ inputs.repository_name }}
-            if: ${{github.repository == 'pipelines'}}
+            if: ${{github.repository != ${{inputs.repository_name}} }}
             continue-on-error: false
           
           - name: Checkout code
