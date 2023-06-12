@@ -1,4 +1,4 @@
-# My Repository
+# Pipelines
 
 This repository contains my project's source code and is integrated with GitHub Actions for continuous integration and deployment.
 
