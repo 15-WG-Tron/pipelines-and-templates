@@ -13,9 +13,13 @@ jobs:
     steps:
           - name: Get remote Repository name
             run: echo Remote Repository - ${{ inputs.repository_name }}
+            if: ${{github.repository === 'pipelines'}}
+            continue-on-error: false
           
           - name: Checkout code
             uses: actions/checkout@v3.5.3
+#             with:
+#               repository: ${{inputs.repository_name}}
             
           - name: Set up Node
             uses: actions/setup-node@v2.5.2
