@@ -1,6 +1,6 @@
 # Tron CI Pipelines
 
-This repository contains CI pipeline files for the Tron organization. These pipelines are designed to automate the continuous integration process and ensure code quality across Tron projects.
+This repository contains CI pipeline files for Tron. These pipelines are designed to automate the continuous integration process and ensure code quality across Tron projects.
 
 ## Pipelines
 
@@ -32,8 +32,8 @@ The deployment pipeline is triggered when changes are merged to the master branc
 
 The CI pipeline workflow files are organized in the `.github/workflows` directory of this repository. You can find the following files:
 
-- `.github/workflows/commit-branch.yaml`: Defines the Commit Branch pipeline workflow.
-- `.github/workflows/merge-to-master.yaml`: Defines the Merge to Master pipeline workflow.
+- `.github/workflows/ci-pipeline.yaml`: Defines the CI pipeline workflow.
+- `.github/workflows/deployment-pipeline.yaml`: Defines the deployment pipeline workflow.
 
 ## Usage
 
