@@ -1,8 +1,9 @@
 name: CI Pipeline
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
 
 jobs:
-  commit_branch:
+  CI_Pipleine:
     runs-on: ubuntu-latest
 
     steps:
