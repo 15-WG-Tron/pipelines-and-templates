@@ -1,0 +1,49 @@
+name: CI Pipeline
+on:
+  push:
+    branches-ignore:
+      - '*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  commit_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+          - name: Checkout code
+            uses: actions/checkout@v3.5.3
+            
+          - name: Set up Node
+            uses: actions/setup-node@v2.5.2
+            with: 
+                node-version: '14'
+          
+          - name: Install Dependencies
+            run: npm ci
+            
+          - name: Run linting
+            run: npm run lint
+          
+          - name: Run unit test
+            run: npm run test:unit
+            
+          - name: Check Dependencies
+            uses: actions/dependency-review-action@v3.0.6
+            
+          - name: Fortify ScanCentral Scan
+            uses: fortify/gha-setup-scancentral-client@v1.2.0
+          
+          - name: SonarCloud Scan
+            uses: SonarSource/sonarcloud-github-action@v1.9.1
+
+          - name: TruffleHog Scan
+            uses: trufflesecurity/trufflehog@v3.39.0
+            
+          - name: Run E2E Tests
+            run: npm run cypress:run
+            if: ${{ env.RUN_E2E_TESTS == 'true' }}
+      
+
+          
