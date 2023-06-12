@@ -1,5 +1,5 @@
 name: CI Pipeline
-on: workflow_call
+on: workflow_dispatch
 
 jobs:
   commit_branch:
