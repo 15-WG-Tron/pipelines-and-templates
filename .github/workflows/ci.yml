@@ -1,12 +1,19 @@
 name: CI Pipeline
 on: 
   workflow_dispatch:
+    inputs: 
+      repository_name: 
+        description: 'Remote Repo Name'
+        required: true
 
 jobs:
   CI_Pipleine:
     runs-on: ubuntu-latest
 
     steps:
+          - name: Get remote Repository name
+            run: echo Remote Repository - ${{ inputs.repository_name }}
+          
           - name: Checkout code
             uses: actions/checkout@v3.5.3
             
