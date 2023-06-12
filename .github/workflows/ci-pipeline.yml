@@ -1,11 +1,5 @@
 name: CI Pipeline
-on:
-  push:
-    branches-ignore:
-      - '*'
-  pull_request:
-    branches:
-      - main
+on: workflow_call
 
 jobs:
   commit_branch:
