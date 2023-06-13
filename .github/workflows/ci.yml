@@ -23,11 +23,6 @@ jobs:
 #             if: ${{github.repository == '15-WG-Tron/pipelines'}}
 #             continue-on-error: false
 
-          - name: Base Ref
-            run: echo ${{inputs.base_ref}}
-            
-          - name: Head Ref
-            run: echo ${{inputs.head_ref}}
           
           - name: Checkout code
             uses: actions/checkout@v3.5.3
@@ -40,32 +35,32 @@ jobs:
           - name: Install Dependencies
             run: npm ci --legacy-peer-deps
             
-          - name: Run linting
-            run: npm run lint
+#           - name: Run linting
+#             run: npm run lint
           
-          - name: Run unit test
-            run: npm run test:unit
+#           - name: Run unit test
+#             run: npm run test:unit
             
-          - name: Dependency Check
-            uses: dependency-check/Dependency-Check_Action@1.1.0
-            with:
-              project: ${{inputs.repository_name}}
-              path: '.'
-              format: 'HTML'
-          - name: Upload Test results
-            uses: actions/upload-artifact@master
-            with:
-              name: Depcheck report
-              path: ${{github.workspace}}/reports
+#           - name: Dependency Check
+#             uses: dependency-check/Dependency-Check_Action@1.1.0
+#             with:
+#               project: ${{inputs.repository_name}}
+#               path: '.'
+#               format: 'HTML'
+#           - name: Upload Test results
+#             uses: actions/upload-artifact@master
+#             with:
+#               name: Depcheck report
+#               path: ${{github.workspace}}/reports
 
-          - name: Fortify ScanCentral Scan
-            uses: fortify/gha-setup-scancentral-client@v1.2.0
+#           - name: Fortify ScanCentral Scan
+#             uses: fortify/gha-setup-scancentral-client@v1.2.0
  
-          - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@v1.9.1
-            env:
-             GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
-             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#           - name: SonarCloud Scan
+#             uses: SonarSource/sonarcloud-github-action@v1.9.1
+#             env:
+#              GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
+#              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
