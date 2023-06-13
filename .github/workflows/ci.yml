@@ -63,8 +63,8 @@ jobs:
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
             with:
-              path: ${{ inputs.repository_name }}
-              base: main
+              path: ./
+              base: ${{inputs.repository_name}}
               head: HEAD
               extra_args: --debug --only-verified
             
