@@ -5,6 +5,12 @@ on:
       repository_name: 
         description: 'Remote Repo Name'
         required: true
+      base_ref:
+        description: 'Main branch that will be changed'
+        required: true
+      head_ref: 
+        description: 'Branch contain changes'
+        required: true
 
 jobs:
   CI_Pipleine:
@@ -13,47 +19,47 @@ jobs:
     steps:
           - name: Get Remote Repository name
             run: echo Remote Repository - ${{ inputs.repository_name }}
+            
 #             if: ${{github.repository == '15-WG-Tron/pipelines'}}
 #             continue-on-error: false
-          
-          - name: Checkout code
-            uses: actions/checkout@v3.5.3
-            with:
-              repository: ${{inputs.repository_name}}
-            
-          - name: Set up Node
-            uses: actions/setup-node@v2.5.2
-            with: 
-                node-version: '16'
-          
-          - name: Install Dependencies
-            run: npm ci --legacy-peer-deps
-            
-          - name: Run linting
-            run: npm run lint
-          
-          - name: Run unit test
-            run: npm run test:unit
-            
-          - name: Check Dependencies
-            uses: actions/dependency-review-action@v3.0.6
-            with:
-              repository: ${{inputs.repository_name}}
-            
-          - name: Fortify ScanCentral Scan
-            uses: fortify/gha-setup-scancentral-client@v1.2.0
-            with:
-              repository: ${{inputs.repository_name}}
-          
-          - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@v1.9.1
-            with:
-              repository: ${{inputs.repository_name}}
 
-          - name: TruffleHog Scan
-            uses: trufflesecurity/trufflehog@v3.39.0
-            with:
-              repository: ${{inputs.repository_name}}
+          - name: Base Ref
+            run: echo ${{inputs.base_ref}}
+            
+          - name: Head Ref
+            run: echo $ {{inputs.head_ref}}
+          
+#           - name: Checkout code
+#             uses: actions/checkout@v3.5.3
+#             with:
+#               repository: ${{inputs.repository_name}}
+            
+#           - name: Set up Node
+#             uses: actions/setup-node@v2.5.2
+#             with: 
+#                 node-version: '16'
+          
+#           - name: Install Dependencies
+#             run: npm ci --legacy-peer-deps
+            
+#           - name: Run linting
+#             run: npm run lint
+          
+#           - name: Run unit test
+#             run: npm run test:unit
+            
+#           - name: Check Dependencies
+#             uses: actions/dependency-review-action@v3.0.6
+            
+#           - name: Fortify ScanCentral Scan
+#             uses: fortify/gha-setup-scancentral-client@v1.2.0
+ 
+          
+#           - name: SonarCloud Scan
+#             uses: SonarSource/sonarcloud-github-action@v1.9.1
+
+#           - name: TruffleHog Scan
+#             uses: trufflesecurity/trufflehog@v3.39.0
             
           - name: Pipeline Completed
             run: echo "Pipeline is done running"
