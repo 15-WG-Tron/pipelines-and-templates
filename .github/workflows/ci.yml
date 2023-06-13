@@ -58,17 +58,22 @@ jobs:
               name: Depcheck report
               path: ${{github.workspace}}/reports
 
-
-            
-#           - name: Fortify ScanCentral Scan
-#             uses: fortify/gha-setup-scancentral-client@v1.2.0
+          - name: Fortify ScanCentral Scan
+            uses: fortify/gha-setup-scancentral-client@v1.2.0
  
-          
-#           - name: SonarCloud Scan
-#             uses: SonarSource/sonarcloud-github-action@v1.9.1
+          - name: SonarCloud Scan
+            uses: SonarSource/sonarcloud-github-action@v1.9.1
+            env:
+             GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
+             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            with: 
+              projectBaseDir: ${{inputs.repository_name}}
 
-#           - name: TruffleHog Scan
-#             uses: trufflesecurity/trufflehog@v3.39.0
+          - name: TruffleHog Scan
+            uses: trufflesecurity/trufflehog@v3.39.0
+            with:
+              path: ${{inputs.repository_name}}
+              head: ${{inputd.head_ref}}
             
           - name: Pipeline Completed
             run: echo "Pipeline is done running"
