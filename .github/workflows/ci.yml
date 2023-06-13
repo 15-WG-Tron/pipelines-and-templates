@@ -48,12 +48,19 @@ jobs:
 #           - name: Run unit test
 #             run: npm run test:unit
             
-          - name: Check Dependencies
-            uses: actions/dependency-review-action@v3.0.6
+          - name: Dependency Check
+            uses: dependency-check/Dependency-Check_Action@1.1.0
             with:
-              base-ref: ${{inputs.base_ref}}
-              head-ref: ${{inputs.head_ref}}
-              fail-on-severity: critical
+              project: ${{inputs.repository_name}}
+              path: '.'
+              format: 'HTML'
+          - name: Upload Test results
+            uses: actions/upload-artifact@master
+            with:
+              name: Depcheck report
+              path: ${{github.workspace}}/reports
+
+
             
 #           - name: Fortify ScanCentral Scan
 #             uses: fortify/gha-setup-scancentral-client@v1.2.0
