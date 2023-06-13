@@ -42,17 +42,17 @@ jobs:
             
           - name: Fortify ScanCentral Scan
             uses: fortify/gha-setup-scancentral-client@v1.2.0
-             with:
+            with:
               repository: ${{inputs.repository_name}}
           
           - name: SonarCloud Scan
             uses: SonarSource/sonarcloud-github-action@v1.9.1
-             with:
+            with:
               repository: ${{inputs.repository_name}}
 
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
-             with:
+            with:
               repository: ${{inputs.repository_name}}
             
           - name: Pipeline Completed
