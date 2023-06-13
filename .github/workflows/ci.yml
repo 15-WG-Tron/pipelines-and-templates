@@ -35,27 +35,55 @@ jobs:
           - name: Install Dependencies
             run: npm ci --legacy-peer-deps
             
-#           - name: Run linting
-#             run: npm run lint
+          - name: Run linting
+            run: npm run lint
           
-#           - name: Run unit test
-#             run: npm run test:unit
+          - name: Run unit test
+            run: npm run test:unit
             
-#           - name: Dependency Check
-#             uses: dependency-check/Dependency-Check_Action@1.1.0
-#             with:
-#               project: ${{inputs.repository_name}}
-#               path: '.'
-#               format: 'HTML'
-#           - name: Upload Test results
-#             uses: actions/upload-artifact@master
-#             with:
-#               name: Depcheck report
-#               path: ${{github.workspace}}/reports
+          - name: Dependency Check
+            uses: dependency-check/Dependency-Check_Action@1.1.0
+            with:
+              project: ${{inputs.repository_name}}
+              path: '.'
+              format: 'HTML'
+          - name: Upload Test results
+            uses: actions/upload-artifact@master
+            with:
+              name: Depcheck report
+              path: ${{github.workspace}}/reports
 
-#           - name: Fortify ScanCentral Scan
-#             uses: fortify/gha-setup-scancentral-client@v1.2.0
- 
+          - name: Fortify ScanCentral Scan
+            uses: fortify/gha-setup-scancentral-client@v1.2.0
+            
+          - name: Setup Java
+            uses: actions/setup-java@v1
+            with:
+              java-version: 11
+
+          ### Set up Fortify ScanCentral Client ###
+          - name: Download Fortify ScanCentral Client
+            uses: fortify/gha-setup-scancentral-client@v1   
+            with:
+              version: 21.2.0 
+          
+          - name: Perform SAST Scan
+            run: scancentral -url ${SC_CONTROLLER_URL} start $BUILD_OPTS -upload -application $APPLICATION -version $VERSION -uptoken $SSC_UPLOAD_TOKEN
+            env:                                            
+              SC_CONTROLLER_URL: ${{ secrets.SC_CONTROLLER_URL }}
+              SSC_UPLOAD_TOKEN: ${{ secrets.SSC_UPLOAD_TOKEN }}
+              APPLICATION: "My Application"
+              VERSION: "1.0"
+              BUILD_OPTS: "-bt mvn"
+
+          ### Archive ScanCentral Client logs on failure ###
+          - name: Save ScanCentral Logs
+            uses: actions/upload-artifact@v2                
+            if: failure()
+            with:
+               name: scancentral-logs
+               path: ~/.fortify/scancentral/log
+
 #           - name: SonarCloud Scan
 #             uses: SonarSource/sonarcloud-github-action@v1.9.1
 #             env:
