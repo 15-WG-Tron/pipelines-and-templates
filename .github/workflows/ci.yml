@@ -61,7 +61,7 @@ jobs:
              GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             with:
-             projectBaseDir: ./
+             projectBaseDir: ${{inputs.repository_name}}
 
 #           - name: TruffleHog Scan
 #             uses: trufflesecurity/trufflehog@v3.39.0
