@@ -64,7 +64,8 @@ jobs:
             uses: trufflesecurity/trufflehog@v3.39.0
             with:
               path: ${{ inputs.repository_name }}
-              base: ${{ inputs.base_ref }}
+              base: main
+              head: HEAD
               extra_args: --debug --only-verified
             
           - name: Pipeline Completed
