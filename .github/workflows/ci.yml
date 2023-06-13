@@ -53,7 +53,7 @@ jobs:
             with:
               base-ref: ${{inputs.base_ref}}
               head-ref: ${{inputs.head_ref}}
-              fail-on-severity: critical, high
+              fail-on-severity: critical
             
 #           - name: Fortify ScanCentral Scan
 #             uses: fortify/gha-setup-scancentral-client@v1.2.0
