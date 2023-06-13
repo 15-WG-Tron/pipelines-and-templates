@@ -73,7 +73,7 @@ jobs:
             uses: trufflesecurity/trufflehog@v3.39.0
             with:
               path: ${{inputs.repository_name}}
-              head: ${{inputd.head_ref}}
+              head: ${{inputs.head_ref}}
             
           - name: Pipeline Completed
             run: echo "Pipeline is done running"
