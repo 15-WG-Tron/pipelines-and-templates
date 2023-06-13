@@ -63,9 +63,9 @@ jobs:
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
             with:
-              path: ./
-              base: ${{inputs.repository_name}}
-              head: HEAD
+              path: ${{inputs.repository_name}}
+              base: 'main'
+              head: ${{inputs.head_ref}}
               extra_args: --debug --only-verified
             
           - name: Pipeline Completed
