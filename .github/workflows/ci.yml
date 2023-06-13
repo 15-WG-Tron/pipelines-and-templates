@@ -37,15 +37,23 @@ jobs:
             
           - name: Check Dependencies
             uses: actions/dependency-review-action@v3.0.6
+            with:
+              repository: ${{inputs.repository_name}}
             
           - name: Fortify ScanCentral Scan
             uses: fortify/gha-setup-scancentral-client@v1.2.0
+             with:
+              repository: ${{inputs.repository_name}}
           
           - name: SonarCloud Scan
             uses: SonarSource/sonarcloud-github-action@v1.9.1
+             with:
+              repository: ${{inputs.repository_name}}
 
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
+             with:
+              repository: ${{inputs.repository_name}}
             
           - name: Pipeline Completed
             run: echo "Pipeline is done running"
