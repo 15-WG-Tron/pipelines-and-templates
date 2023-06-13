@@ -27,17 +27,17 @@ jobs:
             run: echo ${{inputs.base_ref}}
             
           - name: Head Ref
-            run: echo $ {{inputs.head_ref}}
+            run: echo ${{inputs.head_ref}}
           
-#           - name: Checkout code
-#             uses: actions/checkout@v3.5.3
-#             with:
-#               repository: ${{inputs.repository_name}}
+          - name: Checkout code
+            uses: actions/checkout@v3.5.3
+            with:
+              repository: ${{inputs.repository_name}}
             
-#           - name: Set up Node
-#             uses: actions/setup-node@v2.5.2
-#             with: 
-#                 node-version: '16'
+          - name: Set up Node
+            uses: actions/setup-node@v2.5.2
+            with: 
+                node-version: '16'
           
 #           - name: Install Dependencies
 #             run: npm ci --legacy-peer-deps
@@ -48,8 +48,12 @@ jobs:
 #           - name: Run unit test
 #             run: npm run test:unit
             
-#           - name: Check Dependencies
-#             uses: actions/dependency-review-action@v3.0.6
+          - name: Check Dependencies
+            uses: actions/dependency-review-action@v3.0.6
+            with:
+              base-ref: ${{inputs.base_ref}}
+              head-ref: ${{inputs.head_ref}}
+              fail-on-severity: critial, major
             
 #           - name: Fortify ScanCentral Scan
 #             uses: fortify/gha-setup-scancentral-client@v1.2.0
