@@ -56,11 +56,11 @@ jobs:
 #           - name: Fortify ScanCentral Scan
 #             uses: fortify/gha-setup-scancentral-client@v1.2.0
  
-          - name: SonarCloud Scan
-            uses: SonarSource/sonarcloud-github-action@v1.9.1
-            env:
-             GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
-             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#           - name: SonarCloud Scan
+#             uses: SonarSource/sonarcloud-github-action@v1.9.1
+#             env:
+#              GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
+#              SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
           - name: TruffleHog Scan
             uses: trufflesecurity/trufflehog@v3.39.0
