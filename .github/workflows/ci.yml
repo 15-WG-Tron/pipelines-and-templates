@@ -18,7 +18,7 @@ jobs:
 
     steps:
           - name: Check if correct repository
-            if: ${{ github.repository != ${{inputs.repository_name}} }}
+            if: ${{ github.repository != "${{inputs.repository_name}}" }}
             run: |
               gh run cancel ${{ github.run_id }}
               gh run watch ${{ github.run_id }}
