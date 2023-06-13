@@ -65,8 +65,8 @@ jobs:
             uses: trufflesecurity/trufflehog@v3.39.0
             continue-on-error: true
             with:
-              path: ./
-              base: ${{ github.event.repository.default_branch }}"
+              path: ./${{inputs.repository_name}}
+              base: "${{ github.event.repository.default_branch }}"
               head: HEAD
               extra_args: --debug --only-verified
             
