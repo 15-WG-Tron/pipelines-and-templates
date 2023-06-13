@@ -13,7 +13,7 @@ jobs:
     steps:
           - name: Get Remote Repository name
             run: echo Remote Repository - ${{ inputs.repository_name }}
-            if: ${{github.repository != ${{inputs.repository_name}} }}
+            if: ${{github.repository == '15-WG-Tron/pipelines'}}
             continue-on-error: false
           
           - name: Checkout code
