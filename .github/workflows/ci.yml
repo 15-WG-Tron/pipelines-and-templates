@@ -35,6 +35,7 @@ jobs:
       steps:
         - name: Lint
           run: npm run lint
+          working-directory: ${{inputs.head_ref}}
 
   Test:
       runs-on: ubuntu-latest
@@ -42,6 +43,7 @@ jobs:
       steps:
        - name: Unit Test
          run: npm run test:unit
+         working-directory: ${{inputs.head_ref}}
 
   Dependency-Check:
       runs-on: ubuntu-latest
@@ -89,3 +91,4 @@ jobs:
           base: "${{ github.event.repository.default_branch }}"
           head: HEAD
           extra_args: --debug --only-verified
+          working-directory: ${{inputs.head_ref}}
