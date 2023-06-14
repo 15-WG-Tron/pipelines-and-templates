@@ -23,6 +23,7 @@ jobs:
             with:
               repository: ${{inputs.repository_name}}
               fetch-depth: 0
+              ref: ${{ inputs.head_ref }}
             
           - name: Set up Node
             uses: actions/setup-node@v2.5.2
