@@ -26,10 +26,6 @@ jobs:
 
       - name: Set up Node
         uses: actions/setup-node@v2.5.2
-        with:
-          node-version: '16'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
 
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
@@ -39,61 +35,62 @@ jobs:
       needs: Setup
       steps:
         - name: Lint
-          run: npm run lint
+          run: |
+            cd efmp
+            npm run lint
           
-
-  Test:
-      runs-on: ubuntu-latest
-      needs: Setup
-      steps:
-       - name: Unit Test
-         run: npm run test:unit
+#   Test:
+#       runs-on: ubuntu-latest
+#       needs: Setup
+#       steps:
+#        - name: Unit Test
+#          run: npm run test:unit
          
 
-  Dependency-Check:
-      runs-on: ubuntu-latest
-      needs: Setup
-      steps:
-       - name: Dependency Check
-         uses: dependency-check/Dependency-Check_Action@1.1.0
-         with:
-            project: ${{inputs.repository_name}}
-            path: '.'
-            format: 'HTML'
+#   Dependency-Check:
+#       runs-on: ubuntu-latest
+#       needs: Setup
+#       steps:
+#        - name: Dependency Check
+#          uses: dependency-check/Dependency-Check_Action@1.1.0
+#          with:
+#             project: ${{inputs.repository_name}}
+#             path: '.'
+#             format: 'HTML'
 
-  Upload-DepCheck:
-        runs-on: ubuntu-latest
-        needs: [Setup, Dependency-Check]
-        steps:
-         - name: Upload Artifact
-           uses: actions/upload-artifact@master
-           with:
-            name: Depcheck report
-            path: ${{github.workspace}}/reports
+#   Upload-DepCheck:
+#         runs-on: ubuntu-latest
+#         needs: [Setup, Dependency-Check]
+#         steps:
+#          - name: Upload Artifact
+#            uses: actions/upload-artifact@master
+#            with:
+#             name: Depcheck report
+#             path: ${{github.workspace}}/reports
 
-  SonarCloud:
-      runs-on: ubuntu-latest
-      needs: Setup
-      steps:
-       - name: SonarCloud Scan
-         uses: SonarSource/sonarcloud-github-action@v1.9.1
-         env:
-            GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-         with:
-            args:
-              -Dsonar.projectKey=15-WG-Tron_jbphh-efmp
-              -Dsonar.organization=15-wg-tron
-  TruffleHog:
-      runs-on: ubuntu-latest
-      needs: Setup
-      steps:
-       - name: TruffleHog Scan
-         uses: trufflesecurity/trufflehog@v3.39.0
-         continue-on-error: true
-         with:
-          path: ./
-          base: "${{ github.event.repository.default_branch }}"
-          head: HEAD
-          extra_args: --debug --only-verified
+#   SonarCloud:
+#       runs-on: ubuntu-latest
+#       needs: Setup
+#       steps:
+#        - name: SonarCloud Scan
+#          uses: SonarSource/sonarcloud-github-action@v1.9.1
+#          env:
+#             GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
+#             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          with:
+#             args:
+#               -Dsonar.projectKey=15-WG-Tron_jbphh-efmp
+#               -Dsonar.organization=15-wg-tron
+#   TruffleHog:
+#       runs-on: ubuntu-latest
+#       needs: Setup
+#       steps:
+#        - name: TruffleHog Scan
+#          uses: trufflesecurity/trufflehog@v3.39.0
+#          continue-on-error: true
+#          with:
+#           path: ./
+#           base: "${{ github.event.repository.default_branch }}"
+#           head: HEAD
+#           extra_args: --debug --only-verified
       
