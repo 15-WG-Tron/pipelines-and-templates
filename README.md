@@ -24,7 +24,6 @@ The CI pipeline is triggered on every commit to a branch. It performs the follow
 The deployment pipeline is triggered when changes are merged to the master branch. It includes the following stages:
 
 - End-to-end tests
-- Penetration testing
 - Deploy to staging
 - Manual control for deploying to production
 
