@@ -32,65 +32,106 @@ jobs:
 
   Lint:
       runs-on: ubuntu-latest
-      needs: Setup
       steps:
-        - name: Lint
-          run: |
-            cd jbphh-efmp
-            npm run lint
+       - name: Checkout code
+         uses: actions/checkout@v3.5.3
+         with:
+          repository: ${{inputs.repository_name}}
+          fetch-depth: 0
+          ref: ${{ inputs.head_ref }}
+
+       - name: Set up Node
+         uses: actions/setup-node@v2.5.2
+
+       - name: Install Dependencies
+         run: npm ci --legacy-peer-deps
+
+       - name: Lint
+         run: npm run lint
           
-#   Test:
-#       runs-on: ubuntu-latest
-#       needs: Setup
-#       steps:
-#        - name: Unit Test
-#          run: npm run test:unit
+  Test:
+      runs-on: ubuntu-latest
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3.5.3
+         with:
+          repository: ${{inputs.repository_name}}
+          fetch-depth: 0
+          ref: ${{ inputs.head_ref }}
+
+       - name: Set up Node
+         uses: actions/setup-node@v2.5.2
+
+       - name: Install Dependencies
+         run: npm ci --legacy-peer-deps
+
+       - name: Unit Test
+         run: npm run test:unit
          
 
-#   Dependency-Check:
-#       runs-on: ubuntu-latest
-#       needs: Setup
-#       steps:
-#        - name: Dependency Check
-#          uses: dependency-check/Dependency-Check_Action@1.1.0
-#          with:
-#             project: ${{inputs.repository_name}}
-#             path: '.'
-#             format: 'HTML'
+  Dependency-Check:
+      runs-on: ubuntu-latest
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3.5.3
+         with:
+          repository: ${{inputs.repository_name}}
+          fetch-depth: 0
+          ref: ${{ inputs.head_ref }}
 
-#   Upload-DepCheck:
-#         runs-on: ubuntu-latest
-#         needs: [Setup, Dependency-Check]
-#         steps:
-#          - name: Upload Artifact
-#            uses: actions/upload-artifact@master
-#            with:
-#             name: Depcheck report
-#             path: ${{github.workspace}}/reports
+       - name: Set up Node
+         uses: actions/setup-node@v2.5.2
 
-#   SonarCloud:
-#       runs-on: ubuntu-latest
-#       needs: Setup
-#       steps:
-#        - name: SonarCloud Scan
-#          uses: SonarSource/sonarcloud-github-action@v1.9.1
-#          env:
-#             GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
-#             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#          with:
-#             args:
-#               -Dsonar.projectKey=15-WG-Tron_jbphh-efmp
-#               -Dsonar.organization=15-wg-tron
-#   TruffleHog:
-#       runs-on: ubuntu-latest
-#       needs: Setup
-#       steps:
-#        - name: TruffleHog Scan
-#          uses: trufflesecurity/trufflehog@v3.39.0
-#          continue-on-error: true
-#          with:
-#           path: ./
-#           base: "${{ github.event.repository.default_branch }}"
-#           head: HEAD
-#           extra_args: --debug --only-verified
+       - name: Install Dependencies
+         run: npm ci --legacy-peer-deps
+
+       - name: Dependency Check
+         uses: dependency-check/Dependency-Check_Action@1.1.0
+         with:
+            project: ${{inputs.repository_name}}
+            path: '.'
+            format: 'HTML'
+       - name: Upload Artifact
+         uses: actions/upload-artifact@master
+         with:
+          name: Depcheck report
+          path: ${{github.workspace}}/reports
+
+  SonarCloud:
+      runs-on: ubuntu-latest
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3.5.3
+         with:
+          repository: ${{inputs.repository_name}}
+          fetch-depth: 0
+          ref: ${{ inputs.head_ref }}
+      
+       - name: SonarCloud Scan
+         uses: SonarSource/sonarcloud-github-action@v1.9.1
+         env:
+            GITHUB_TOKEN: ${{ secrets.ORG_TOKEN }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         with:
+            args:
+              -Dsonar.projectKey=15-WG-Tron_jbphh-efmp
+              -Dsonar.organization=15-wg-tron
+  TruffleHog:
+      runs-on: ubuntu-latest
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v3.5.3
+         with:
+          repository: ${{inputs.repository_name}}
+          fetch-depth: 0
+          ref: ${{ inputs.head_ref }}
+
+       - name: TruffleHog Scan
+         uses: trufflesecurity/trufflehog@v3.39.0
+         continue-on-error: true
+         with:
+          path: ./
+          base: "${{ github.event.repository.default_branch }}"
+          head: HEAD
+          extra_args: --debug --only-verified
       
