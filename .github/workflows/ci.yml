@@ -13,23 +13,6 @@ on:
         required: true
 
 jobs:
-  
-  Setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3.5.3
-        with:
-          repository: ${{inputs.repository_name}}
-          fetch-depth: 0
-          ref: ${{ inputs.head_ref }}
-
-      - name: Set up Node
-        uses: actions/setup-node@v2.5.2
-
-      - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
-
   Lint:
       runs-on: ubuntu-latest
       steps:
