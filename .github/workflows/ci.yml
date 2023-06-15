@@ -36,7 +36,7 @@ jobs:
       steps:
         - name: Lint
           run: |
-            cd efmp
+            cd jbphh-efmp
             npm run lint
           
 #   Test:
