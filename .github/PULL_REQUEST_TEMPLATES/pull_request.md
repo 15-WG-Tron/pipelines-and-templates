@@ -1,5 +1,18 @@
 # Pull Request
 
+## Instructions
+1. Select the appropriate pull request type by marking the checkbox with an 'x'.
+2. Remove the unnecessary sections from the template that are not applicable to your pull request.
+3. Provide a clear and concise description of the problem you're addressing or the feature you're adding.
+4. If there is an associated issue, link it in the "Related Issue" section.
+5. Describe the changes made in this pull request in the "Proposed Changes" section.
+6. Include any relevant screenshots or error messages in the "Screenshots or Error Messages" section, if applicable.
+7. Mark the completed tasks in the checklist with an 'x' to indicate that you have completed them.
+8. Add any additional notes or considerations for the reviewers in the "Additional Notes" section.
+
+Please follow these instructions when creating your pull request to ensure a smooth and efficient review process.
+
+
 ## Pull Request Type
 <!-- Select the appropriate type by replacing [ ] with [x] -->
 
