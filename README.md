@@ -36,13 +36,13 @@ The CI pipeline workflow files are organized in the `.github/workflows` director
 
 ## Pull Request Template
 
-When creating a pull request, please use the provided pull request template to ensure all necessary information is provided and naming conventions are followed. The pull request template is located at [PULL_REQUEST_TEMPLATE.md](./.github/PULL_REQUEST_TEMPLATE.md).
+When creating a pull request, please use the provided pull request template to ensure all necessary information is provided and naming conventions are followed. The pull request template is located at [PULL_REQUEST_TEMPLATE.md](https://github.com/15-WG-Tron/pipelines-and-templates/blob/main/.github/PULL_REQUEST_TEMPLATES/pull_request.md).
 
 To use the pull request template:
 
 1. Go to the project repository's `.github` directory.
 2. Create a file called `PULL_REQUEST_TEMPLATE.md`.
-3. Copy the contents of the [Pull Request Template](./.github/PULL_REQUEST_TEMPLATE.md) into the `PULL_REQUEST_TEMPLATE.md` file.
+3. Copy the contents of the [Pull Request Template](https://github.com/15-WG-Tron/pipelines-and-templates/blob/main/.github/PULL_REQUEST_TEMPLATES/pull_request.md) into the `PULL_REQUEST_TEMPLATE.md` file.
 4. Customize the template as needed, including the pull request description, related issues, and the checklist.
 5. Save the `PULL_REQUEST_TEMPLATE.md` file.
 
